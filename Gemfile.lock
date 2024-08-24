@@ -98,6 +98,7 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    diffy (3.4.2)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -149,6 +150,7 @@ GEM
     parser (3.3.4.2)
       ast (~> 2.4.1)
       racc
+    pg (1.5.7)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -201,6 +203,9 @@ GEM
       io-console (~> 0.5)
     rexml (3.3.6)
       strscan
+    ridgepole (2.1.0)
+      activerecord (>= 6.1, < 8.0)
+      diffy
     rubocop (1.65.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -287,12 +292,14 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
+  pg
   puma (>= 5.0)
   rails (~> 7.2.1)
+  ridgepole
   rubocop-rails-omakase
   selenium-webdriver
   sprockets-rails
-  sqlite3 (>= 1.4)
+  sqlite3 (= 2.0.4)
   stimulus-rails
   turbo-rails
   tzinfo-data
