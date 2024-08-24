@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Bank accounts" %>
+
+<h1>Bank accounts</h1>
+
+<div id="bank_accounts">
+  <table>
+		<tr>
+      <td>銀行名</td>
+			<td>支店名</td>
+			<td>口座種別</td>
+			<td>口座番号</td>
+			<td>口座名義</td>
+      <td></td>
+    </tr>
+    <% @bank_accounts.each do |bank_account| %>
+      <%= render bank_account %>
+    <% end %>
+
+    </table>
+    
+</div>
+
+<%= link_to "New bank account", new_bank_account_path %>

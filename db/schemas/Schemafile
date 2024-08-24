@@ -1,0 +1,2 @@
+require 'bank_accounts.schema.rb'
+require 'transfers.schema.rb'
