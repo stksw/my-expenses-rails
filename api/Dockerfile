@@ -15,8 +15,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     libpq-dev \
     postgresql-client \
     libvips \
-    curl \
-    nodejs \
+    curl
 
 ENV LANG=C.UTF-8 \
   BUNDLE_JOBS=4 \
@@ -25,7 +24,5 @@ ENV LANG=C.UTF-8 \
 RUN gem update --system && gem install bundler
 
 WORKDIR /usr/src/app
-
-ENTRYPOINT ["./bin/docker-entrypoint.sh"]
 
 EXPOSE 3000
