@@ -17,15 +17,12 @@ RUN --mount=type=cache,target=/var/cache/apt \
     libvips \
     curl \
     nodejs \
-    npm
 
 ENV LANG=C.UTF-8 \
   BUNDLE_JOBS=4 \
   BUNDLE_RETRY=3
 
 RUN gem update --system && gem install bundler
-RUN npm install -g yarn
-RUN yarn install
 
 WORKDIR /usr/src/app
 
