@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Theme, Box } from "@radix-ui/themes";
+import { Theme, Box, Link, Tooltip } from "@radix-ui/themes";
+import { Home, LineChart, Package, Settings, Users2 } from "lucide-react";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
+import { NavItem } from "./nav-item";
+import { TooltipProvider } from "../components/tooltip";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,15 +22,67 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className={inter.className}>
-        <Theme
-          accentColor="crimson"
-          grayColor="sand"
-          radius="large"
-          scaling="95%"
-        >
-          <Box p="8">{children}</Box>
-        </Theme>
+        <TooltipProvider>
+          <main className="flex min-h-screen w-full flex-col bg-muted/40">
+            <Theme
+              accentColor="crimson"
+              grayColor="sand"
+              radius="large"
+              scaling="95%"
+            >
+              <Box p="8">{children}</Box>
+            </Theme>
+            <DesktopNav />
+          </main>
+        </TooltipProvider>
       </body>
     </html>
+  );
+}
+
+function DesktopNav() {
+  return (
+    <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+      <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+        <Link
+          href="https://vercel.com/templates/next.js/admin-dashboard-tailwind-postgres-react-nextjs"
+          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+        >
+          <span className="sr-only">Product Name</span>
+        </Link>
+
+        <NavItem href="/" label="home">
+          <Home className="h-5 w-5" />
+        </NavItem>
+
+        <NavItem href="/" label="home">
+          <Package className="h-5 w-5" />
+        </NavItem>
+
+        <NavItem href="/customers" label="Customers">
+          <Users2 className="h-5 w-5" />
+        </NavItem>
+
+        <NavItem href="/customers" label="Customers">
+          <Settings className="h-5 w-5" />
+        </NavItem>
+      </nav>
+
+      {/* 
+        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              href="#"
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+            >
+              <Settings className="h-5 w-5" />
+              <span className="sr-only">Settings</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="right">Settings</TooltipContent>
+        </Tooltip> 
+        </nav> */}
+    </aside>
   );
 }

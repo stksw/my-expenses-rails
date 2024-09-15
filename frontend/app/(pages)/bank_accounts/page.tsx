@@ -1,12 +1,5 @@
 import React, { FC } from "react";
-import {
-  Box,
-  Container,
-  Card,
-  Table,
-  Section,
-  Heading,
-} from "@radix-ui/themes";
+import { Box, Container, Button, Table, Heading } from "@radix-ui/themes";
 
 type BankAccount = {
   id: number;
@@ -20,7 +13,13 @@ type Props = {
 const Home: FC<Props> = (props) => {
   return (
     <Container size="4">
-      <Heading as="h1">口座一覧</Heading>
+      <div className="flex items-center">
+        <Heading as="h1">口座一覧</Heading>
+
+        <div className="ml-auto flex items-center gap-2">
+          <Button color="indigo">口座の追加</Button>
+        </div>
+      </div>
       <Box pt="8">
         <Table.Root>
           <Table.Header>
