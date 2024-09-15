@@ -3,7 +3,7 @@ class BankAccountsController < ActionController::API
 
   def index
     @bank_accounts = BankAccount.all
-    render json: @bank_accounts
+    render json: { data: @bank_accounts, totalCount: @bank_accounts.count }
   end
 
   def show

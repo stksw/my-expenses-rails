@@ -1,16 +1,29 @@
-import React, { FC } from "react";
-import { Box, Container, Button, Table, Heading } from "@radix-ui/themes";
+"use client";
 
-type BankAccount = {
-  id: number;
-  bank_name: string;
-};
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Container,
+  Button,
+  Table,
+  Heading,
+  Skeleton,
+} from "@radix-ui/themes";
+import { bankAccountsApi } from "../../apis/bank_accounts/fetch";
+import { BankAccount } from "../../types/bank_account";
+import { SkeletonTableCell } from "../../components/skelton";
 
-type Props = {
-  bankAccounts: BankAccount[];
-};
+const Home = () => {
+  const [data, setData] = useState<BankAccount[] | null>(null);
 
-const Home: FC<Props> = (props) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await bankAccountsApi();
+      setData(response.data);
+    };
+    fetchData();
+  }, []);
+
   return (
     <Container size="4">
       <div className="flex items-center">
@@ -32,35 +45,33 @@ const Home: FC<Props> = (props) => {
               <Table.ColumnHeaderCell>残高</Table.ColumnHeaderCell>
             </Table.Row>
           </Table.Header>
-
           <Table.Body>
-            <Table.Row>
-              <Table.RowHeaderCell>Danilo Sousa</Table.RowHeaderCell>
-              <Table.Cell>danilo@example.com</Table.Cell>
-              <Table.Cell>Developer</Table.Cell>
-              <Table.Cell>Developer</Table.Cell>
-              <Table.Cell>Developer</Table.Cell>
-              <Table.Cell>Developer</Table.Cell>
-            </Table.Row>
+            {!data ? (
+              <Table.Row>
+                <SkeletonTableCell />
+                <SkeletonTableCell />
+                <SkeletonTableCell />
+                <SkeletonTableCell />
+                <SkeletonTableCell />
+                <SkeletonTableCell />
+              </Table.Row>
+            ) : (
+              data.map((ba: BankAccount) => (
+                <Table.Row>
+                  <Table.Cell>{ba.bank_name}</Table.Cell>
+                  <Table.Cell>{ba.branch}</Table.Cell>
+                  <Table.Cell>{ba.type}</Table.Cell>
+                  <Table.Cell>{ba.number}</Table.Cell>
+                  <Table.Cell>{ba.holder}</Table.Cell>
+                  <Table.Cell> -- </Table.Cell>
+                </Table.Row>
+              ))
+            )}
           </Table.Body>
         </Table.Root>
       </Box>
     </Container>
   );
 };
-
-// export const getStaticProps = async () => {
-//   // URLはlocalhostではなくapiとなる
-//   const response = await fetch("http://localhost:3000/bank_accounts", {
-//     method: "GET",
-//   });
-//   const json = await response.json();
-
-//   return {
-//     props: {
-//       bankAccounts: json,
-//     },
-//   };
-// };
 
 export default Home;

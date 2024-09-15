@@ -5,7 +5,7 @@ import { Home, LineChart, Package, Settings, Users2 } from "lucide-react";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import { NavItem } from "./nav-item";
-import { TooltipProvider } from "../components/tooltip";
+import { TooltipProvider } from "./components/tooltip";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,19 +51,19 @@ function DesktopNav() {
           <span className="sr-only">Product Name</span>
         </Link>
 
-        <NavItem href="/" label="home">
+        <NavItem href="/" label="Home">
           <Home className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/" label="home">
+        <NavItem href="/" label="Transfers">
+          <LineChart className="h-5 w-5" />
+        </NavItem>
+
+        <NavItem href="/bank_accounts" label="Bank">
           <Package className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/customers" label="Customers">
-          <Users2 className="h-5 w-5" />
-        </NavItem>
-
-        <NavItem href="/customers" label="Customers">
+        <NavItem href="/" label="Settings">
           <Settings className="h-5 w-5" />
         </NavItem>
       </nav>

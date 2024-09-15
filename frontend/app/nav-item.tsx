@@ -3,7 +3,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../components/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./components/tooltip";
 
 export const NavItem = ({
   href,
