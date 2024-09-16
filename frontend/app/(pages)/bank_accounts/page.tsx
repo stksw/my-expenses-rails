@@ -1,17 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Container,
-  Button,
-  Table,
-  Heading,
-  Skeleton,
-} from "@radix-ui/themes";
+import { Box, Container, Button, Table, Heading } from "@radix-ui/themes";
 import { bankAccountsApi } from "../../apis/bank_accounts/fetch";
 import { BankAccount } from "../../types/bank_account";
 import { SkeletonTableCell } from "../../components/skelton";
+import { BankAccountForm } from "./form";
 
 const Home = () => {
   const [data, setData] = useState<BankAccount[] | null>(null);
@@ -30,7 +24,7 @@ const Home = () => {
         <Heading as="h1">口座一覧</Heading>
 
         <div className="ml-auto flex items-center gap-2">
-          <Button color="indigo">口座の追加</Button>
+          <BankAccountForm />
         </div>
       </div>
       <Box pt="8">
@@ -57,7 +51,7 @@ const Home = () => {
               </Table.Row>
             ) : (
               data.map((ba: BankAccount) => (
-                <Table.Row>
+                <Table.Row key={ba.id}>
                   <Table.Cell>{ba.bank_name}</Table.Cell>
                   <Table.Cell>{ba.branch}</Table.Cell>
                   <Table.Cell>{ba.type}</Table.Cell>
