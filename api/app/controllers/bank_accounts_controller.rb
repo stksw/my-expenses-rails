@@ -1,5 +1,5 @@
 class BankAccountsController < ActionController::API
-  before_action :set_bank_account, only: %i[ show update destroy ]
+  before_action :set_bank_account, only: %i[ update destroy ]
 
   def index
     @bank_accounts = BankAccount.all
@@ -35,6 +35,6 @@ class BankAccountsController < ActionController::API
     end
 
     def bank_account_params
-      params.require(:bank_account).permit(:bank_name, :branch, :number, :type, :holder)
+      params.require(:bank_account).permit(:bank_name, :branch, :account_number, :account_type, :account_holder)
     end
 end

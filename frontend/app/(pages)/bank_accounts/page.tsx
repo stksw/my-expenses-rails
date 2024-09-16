@@ -54,9 +54,9 @@ const Home = () => {
                 <Table.Row key={ba.id}>
                   <Table.Cell>{ba.bank_name}</Table.Cell>
                   <Table.Cell>{ba.branch}</Table.Cell>
-                  <Table.Cell>{ba.type}</Table.Cell>
-                  <Table.Cell>{ba.number}</Table.Cell>
-                  <Table.Cell>{ba.holder}</Table.Cell>
+                  <Table.Cell>{ba.account_type}</Table.Cell>
+                  <Table.Cell>{ba.account_number}</Table.Cell>
+                  <Table.Cell>{ba.account_holder}</Table.Cell>
                   <Table.Cell> -- </Table.Cell>
                 </Table.Row>
               ))
