@@ -6,15 +6,11 @@ class BankAccountsController < ActionController::API
     render json: { data: @bank_accounts, totalCount: @bank_accounts.count }
   end
 
-  def show
-    render json: @bank_account
-  end
-
   def create
     @bank_account = BankAccount.new(bank_account_params)
 
     if @bank_account.save
-      render json: @bank_account, status: :created, location: @bank_account
+      render json: @bank_account, status: :ok
     else
       render json: @bank_account.errors, status: :unprocessable_entity
     end
@@ -22,7 +18,7 @@ class BankAccountsController < ActionController::API
 
   def update
     if @bank_account.update(bank_account_params)
-      render json: @bank_account
+      render json: @bank_account, status: :ok
     else
       render json: @bank_account.errors, status: :unprocessable_entity
     end
