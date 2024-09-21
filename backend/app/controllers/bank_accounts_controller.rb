@@ -25,7 +25,7 @@ class BankAccountsController < ActionController::API
   end
 
   def destroy
-    @bank_account.destroy!, status: :ok
+    @bank_account.destroy!
   end
 
   private

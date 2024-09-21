@@ -10,7 +10,7 @@ import {
   Button,
 } from "@radix-ui/themes";
 import { Settings } from "lucide-react";
-import { bankAccountsApi } from "../../apis/bank_accounts/fetch";
+import { BankAccountApi } from "../../apis/bank_accounts/fetch";
 import { BankAccount, BankAccountFormData } from "../../types/bank_account";
 import { SkeletonTableCell } from "../../components/skelton";
 import { BankAccountForm } from "./form";
@@ -23,8 +23,8 @@ const Home = () => {
 
   useEffect(() => {
     const fetchList = async () => {
-      const response = await bankAccountsApi();
-      setList(response.data);
+      const res = await BankAccountApi.list();
+      setList(res.data);
     };
     fetchList();
   }, []);
