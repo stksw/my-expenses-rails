@@ -33,6 +33,6 @@ class TransfersController < ActionController::API
     end
 
     def transfer_params
-      params.require(:transfer).permit(:amount, )
+      params.fetch(:transfer, {})
     end
 end
