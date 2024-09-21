@@ -1,2 +1,2 @@
 require 'bank_accounts.schema.rb'
-require 'transfers.schema.rb'
+require 'bank_statements.schema.rb'
