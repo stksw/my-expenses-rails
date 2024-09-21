@@ -1,5 +1,5 @@
 import { SubmitHandler, useController, useForm } from "react-hook-form";
-import { BankAccountForm } from "../types/bank_account";
+import { BankAccountFormData } from "../types/bank_account";
 import { BankAccountApi } from "../(pages)/bank_accounts/fetch";
 
 export const useFormBankAccount = () => {
@@ -9,13 +9,15 @@ export const useFormBankAccount = () => {
     reset,
     register,
     formState: { errors, isSubmitting },
-  } = useForm<BankAccountForm>({
+  } = useForm<BankAccountFormData>({
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<BankAccountForm> = async (data) => {
+  const onSubmit: SubmitHandler<BankAccountFormData> = async (data) => {
     try {
-      await BankAccountApi.create(data);
+      (await data.id)
+        ? BankAccountApi.update(String(data.id), data)
+        : BankAccountApi.create(data);
       // reset();
     } catch (error) {
       console.error(error);

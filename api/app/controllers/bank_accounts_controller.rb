@@ -18,7 +18,7 @@ class BankAccountsController < ActionController::API
 
   def update
     if @bank_account.update(bank_account_params)
-      render json: @bank_account, status: :ok
+      render json: { data: @bank_account }
     else
       render json: @bank_account.errors, status: :unprocessable_entity
     end

@@ -1,5 +1,5 @@
 export type BankAccount = {
-  id: number;
+  id: string;
   bank_name: string;
   branch: string;
   account_type: string;
@@ -9,7 +9,4 @@ export type BankAccount = {
   updated_at: Date;
 };
 
-export type BankAccountForm = Omit<
-  BankAccount,
-  "id" | "created_at" | "updated_at"
->;
+export type BankAccountFormData = Partial<BankAccount>;
