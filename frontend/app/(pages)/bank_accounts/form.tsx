@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Button, Flex, Text, TextField, Dialog } from "@radix-ui/themes";
 import { useFormBankAccount } from "../../hooks/use-form-bank-account";
 import { BankAccountFormData } from "../../types/bank_account";
+import { BankAccountApi } from "../../apis/bank_accounts/fetch";
 
 export const BankAccountForm = ({ data }: { data?: BankAccountFormData }) => {
   const { onSubmit, handleSubmit, register, setValue, reset } =
@@ -15,8 +16,14 @@ export const BankAccountForm = ({ data }: { data?: BankAccountFormData }) => {
       setValue("account_type", data.account_type);
       setValue("account_number", data.account_number);
       setValue("account_holder", data.account_holder);
+    } else {
+      reset();
     }
   }, [data]);
+
+  const handleDelete = async (id: string) => {
+    await BankAccountApi.delete(id!);
+  };
 
   return (
     <Dialog.Content maxWidth="480px">
@@ -68,18 +75,33 @@ export const BankAccountForm = ({ data }: { data?: BankAccountFormData }) => {
             />
           </label>
         </Flex>
-
-        <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
-            <Button color="gray" variant="outline">
-              キャンセル
-            </Button>
-          </Dialog.Close>
-          <Dialog.Close>
-            <Button type="submit" color="indigo" aria-label="Close">
-              保存
-            </Button>
-          </Dialog.Close>
+        <Flex mt="4">
+          {data && (
+            <Flex gap="3" mt="4">
+              <Dialog.Close>
+                <Button
+                  type="button"
+                  color="ruby"
+                  variant="solid"
+                  onClick={() => handleDelete(data.id!)}
+                >
+                  削除
+                </Button>
+              </Dialog.Close>
+            </Flex>
+          )}
+          <Flex gap="3" mt="4" ml="auto" justify="end">
+            <Dialog.Close>
+              <Button color="gray" variant="outline">
+                キャンセル
+              </Button>
+            </Dialog.Close>
+            <Dialog.Close>
+              <Button type="submit" color="indigo" aria-label="Close">
+                保存
+              </Button>
+            </Dialog.Close>
+          </Flex>
         </Flex>
       </form>
     </Dialog.Content>

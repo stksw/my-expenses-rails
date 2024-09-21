@@ -20,7 +20,7 @@ export const BankAccountApi = {
     return await ServerApi.put(`${path}/${id}`, data).then((res) => res.data);
   },
 
-  delete: async (id: number): Promise<HttpStatusCode> => {
+  delete: async (id: string): Promise<HttpStatusCode> => {
     return await ServerApi.delete(`${path}/${id}`).then((res) => res.data);
   },
 };

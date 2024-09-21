@@ -29,8 +29,6 @@ const Home = () => {
     fetchList();
   }, []);
 
-  useEffect(() => {}, [formData]);
-
   return (
     <Dialog.Root>
       <Container size="4">
@@ -40,7 +38,9 @@ const Home = () => {
           <div className="ml-auto flex items-center gap-2">
             <BankAccountForm data={formData} />
             <Dialog.Trigger>
-              <Button color="indigo">口座の追加</Button>
+              <Button color="indigo" onClick={() => setFormData(undefined)}>
+                口座の追加
+              </Button>
             </Dialog.Trigger>
           </div>
         </div>
