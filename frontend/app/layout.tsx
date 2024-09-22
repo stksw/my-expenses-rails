@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Theme, Box, Link, Tooltip } from "@radix-ui/themes";
 import { Home, LineChart, Package, Settings, Users2 } from "lucide-react";
+import { NavItem } from "./nav-item";
+import { TooltipProvider } from "@/components/tooltip";
+import { ProviderTanStackQuery } from "@/providers/tanstack";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
-import { NavItem } from "./nav-item";
-import { TooltipProvider } from "./components/tooltip";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,19 +23,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className={inter.className}>
-        <TooltipProvider>
-          <main className="flex min-h-screen w-full flex-col bg-muted/40">
-            <Theme
-              accentColor="crimson"
-              grayColor="sand"
-              radius="large"
-              scaling="95%"
-            >
-              <Box p="8">{children}</Box>
-            </Theme>
-            <DesktopNav />
-          </main>
-        </TooltipProvider>
+        <ProviderTanStackQuery>
+          <TooltipProvider>
+            <main className="flex min-h-screen w-full flex-col bg-muted/40">
+              <Theme
+                accentColor="crimson"
+                grayColor="sand"
+                radius="large"
+                scaling="95%"
+              >
+                <Box p="8">{children}</Box>
+              </Theme>
+              <DesktopNav />
+            </main>
+          </TooltipProvider>
+        </ProviderTanStackQuery>
       </body>
     </html>
   );

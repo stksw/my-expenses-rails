@@ -10,3 +10,11 @@ export type BankAccount = {
 };
 
 export type BankAccountFormData = Partial<BankAccount>;
+
+export const emptyBankAccount: BankAccountFormData = {
+  bank_name: "",
+  branch: "",
+  account_type: "",
+  account_number: "",
+  account_holder: "",
+};

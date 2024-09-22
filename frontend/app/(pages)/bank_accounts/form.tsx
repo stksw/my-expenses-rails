@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { Button, Flex, Text, TextField, Dialog } from "@radix-ui/themes";
-import { useFormBankAccount } from "../../hooks/use-form-bank-account";
-import { BankAccountFormData } from "../../types/bank_account";
-import { BankAccountApi } from "../../apis/bank_accounts/fetch";
+import { useFormBankAccount } from "@/hooks/use-form-bank-account";
+import { BankAccountFormData } from "@/types/bank_account";
+import { useDeleteBankAccount } from "@/apis/bank_accounts/mutation";
 
-export const BankAccountForm = ({ data }: { data?: BankAccountFormData }) => {
+export const BankAccountForm = ({ data }: { data: BankAccountFormData }) => {
   const { onSubmit, handleSubmit, register, setValue, reset } =
     useFormBankAccount();
+  const deleteBankAccount = useDeleteBankAccount();
 
   useEffect(() => {
-    if (data) {
+    if (data.id !== "") {
       setValue("id", data.id);
       setValue("bank_name", data.bank_name);
       setValue("branch", data.branch);
@@ -20,10 +21,6 @@ export const BankAccountForm = ({ data }: { data?: BankAccountFormData }) => {
       reset();
     }
   }, [data]);
-
-  const handleDelete = async (id: string) => {
-    await BankAccountApi.delete(id!);
-  };
 
   return (
     <Dialog.Content maxWidth="480px">
@@ -76,14 +73,14 @@ export const BankAccountForm = ({ data }: { data?: BankAccountFormData }) => {
           </label>
         </Flex>
         <Flex mt="4">
-          {data && (
+          {data.id && (
             <Flex gap="3" mt="4">
               <Dialog.Close>
                 <Button
                   type="button"
                   color="ruby"
                   variant="solid"
-                  onClick={() => handleDelete(data.id!)}
+                  onClick={() => deleteBankAccount.mutateAsync(data.id!)}
                 >
                   削除
                 </Button>

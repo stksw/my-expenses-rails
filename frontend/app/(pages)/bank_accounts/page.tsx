@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
@@ -10,24 +10,24 @@ import {
   Button,
 } from "@radix-ui/themes";
 import { Settings } from "lucide-react";
-import { BankAccountApi } from "../../apis/bank_accounts/fetch";
-import { BankAccount, BankAccountFormData } from "../../types/bank_account";
+import { BankAccountApi } from "../../apis/bank_accounts/function";
+import {
+  BankAccount,
+  BankAccountFormData,
+  emptyBankAccount,
+} from "../../types/bank_account";
 import { SkeletonTableCell } from "../../components/skelton";
 import { BankAccountForm } from "./form";
+import { useQuery } from "@tanstack/react-query";
 
 const Home = () => {
-  const [list, setList] = useState<BankAccount[] | null>(null);
-  const [formData, setFormData] = useState<BankAccountFormData | undefined>(
-    undefined
-  );
+  const [formData, setFormData] =
+    useState<BankAccountFormData>(emptyBankAccount);
 
-  useEffect(() => {
-    const fetchList = async () => {
-      const res = await BankAccountApi.list();
-      setList(res.data);
-    };
-    fetchList();
-  }, []);
+  const { data: res } = useQuery({
+    queryKey: ["bank_account", "list"],
+    queryFn: () => BankAccountApi.list(),
+  });
 
   return (
     <Dialog.Root>
@@ -38,7 +38,7 @@ const Home = () => {
           <div className="ml-auto flex items-center gap-2">
             <BankAccountForm data={formData} />
             <Dialog.Trigger>
-              <Button color="indigo" onClick={() => setFormData(undefined)}>
+              <Button color="indigo" onClick={() => setFormData({ id: "" })}>
                 口座の追加
               </Button>
             </Dialog.Trigger>
@@ -58,7 +58,7 @@ const Home = () => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {!list ? (
+              {!res ? (
                 <Table.Row>
                   <SkeletonTableCell />
                   <SkeletonTableCell />
@@ -69,7 +69,7 @@ const Home = () => {
                   <SkeletonTableCell />
                 </Table.Row>
               ) : (
-                list.map((ba: BankAccount) => (
+                res.data.map((ba: BankAccount) => (
                   <Table.Row key={ba.id}>
                     <Table.Cell>{ba.bank_name}</Table.Cell>
                     <Table.Cell>{ba.branch}</Table.Cell>
