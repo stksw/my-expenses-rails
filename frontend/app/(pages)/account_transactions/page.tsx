@@ -77,7 +77,7 @@ const AccountTransactionsPage = () => {
                     <Table.Cell>
                       <TransactionAmount transaction={at} />
                     </Table.Cell>
-                    <Table.Cell> -- </Table.Cell>
+                    <Table.Cell>{at.bank_name}</Table.Cell>
                     <Table.Cell>
                       <Dialog.Trigger>
                         <Settings
