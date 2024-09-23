@@ -2,7 +2,7 @@ class AccountTransactionsController < ActionController::API
   before_action :set_account_transaction, only: %i[ update destroy ]
 
   def index
-    @account_transactions = AccountTransaction.all
+    @account_transactions = AccountTransaction.with_bank_account()
     render json: { data: @account_transactions, totalCount: @account_transactions.count }
   end
 

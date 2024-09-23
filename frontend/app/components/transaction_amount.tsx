@@ -9,9 +9,9 @@ export const TransactionAmount = ({
   return (
     <>
       {transaction.type === "deposit" ? (
-        <Text color="blue">{transaction.amount}</Text>
+        <Text color="blue">{Number(transaction.amount).toLocaleString()}</Text>
       ) : (
-        <Text color="red">-{transaction.amount}</Text>
+        <Text color="red">-{Number(transaction.amount).toLocaleString()}</Text>
       )}
     </>
   );
