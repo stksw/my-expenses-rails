@@ -1,20 +1,16 @@
 class BankAccountsController < ActionController::API
-  before_action :set_bank_account, only: %i[ show update destroy ]
+  before_action :set_bank_account, only: %i[ update destroy ]
 
   def index
-    @bank_accounts = BankAccount.all
+    @bank_accounts = BankAccount.order(created_at: :asc)
     render json: { data: @bank_accounts, totalCount: @bank_accounts.count }
-  end
-
-  def show
-    render json: @bank_account
   end
 
   def create
     @bank_account = BankAccount.new(bank_account_params)
 
     if @bank_account.save
-      render json: @bank_account, status: :created, location: @bank_account
+      render json: @bank_account, status: :ok
     else
       render json: @bank_account.errors, status: :unprocessable_entity
     end
@@ -22,7 +18,7 @@ class BankAccountsController < ActionController::API
 
   def update
     if @bank_account.update(bank_account_params)
-      render json: @bank_account
+      render json: { data: @bank_account }
     else
       render json: @bank_account.errors, status: :unprocessable_entity
     end
@@ -39,6 +35,6 @@ class BankAccountsController < ActionController::API
     end
 
     def bank_account_params
-      params.require(:bank_account).permit(:bank_name, :branch, :number, :type, :holder)
+      params.require(:bank_account).permit(:bank_name, :branch, :account_number, :account_type, :account_holder)
     end
 end
