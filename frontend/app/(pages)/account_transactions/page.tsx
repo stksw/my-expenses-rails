@@ -10,36 +10,37 @@ import {
   Button,
 } from "@radix-ui/themes";
 import { Settings } from "lucide-react";
-import { BankAccountApi } from "../../apis/bank_accounts/function";
-import {
-  BankAccount,
-  BankAccountFormData,
-  emptyBankAccount,
-} from "../../types/bank_account";
-import { SkeletonTableCell } from "../../components/skelton";
-import { BankAccountForm } from "./form";
 import { useQuery } from "@tanstack/react-query";
+import { AccountTransactionApi } from "@/apis/account_transactions/function";
+import {
+  AccountTransaction,
+  AccountTransactionFormData,
+  emptyAccountTransaction,
+} from "@/types/account_transaction";
+import { SkeletonTableCell } from "@/components/skelton";
+import { AccountTransactionForm } from "@/(pages)/account_transactions/form";
 
-const BankAccountsPage = () => {
-  const [formData, setFormData] =
-    useState<BankAccountFormData>(emptyBankAccount);
+const AccountTransactionsPage = () => {
+  const [formData, setFormData] = useState<AccountTransactionFormData>(
+    emptyAccountTransaction
+  );
 
   const { data: res } = useQuery({
-    queryKey: ["bank_account", "list"],
-    queryFn: () => BankAccountApi.list(),
+    queryKey: ["account_transactions", "list"],
+    queryFn: () => AccountTransactionApi.list(),
   });
 
   return (
     <Dialog.Root>
       <Container size="4">
         <div className="flex items-center">
-          <Heading as="h1">口座一覧</Heading>
+          <Heading as="h1">口座取引一覧</Heading>
 
           <div className="ml-auto flex items-center gap-2">
-            <BankAccountForm data={formData} />
+            <AccountTransactionForm data={formData} />
             <Dialog.Trigger>
               <Button color="indigo" onClick={() => setFormData({ id: "" })}>
-                口座の追加
+                口座取引の追加
               </Button>
             </Dialog.Trigger>
           </div>
@@ -48,11 +49,10 @@ const BankAccountsPage = () => {
           <Table.Root>
             <Table.Header>
               <Table.Row>
-                <Table.ColumnHeaderCell>金融機関名</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>支店</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>種別</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>口座番号</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell>名義</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>取引日</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>詳細</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>入金</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell>出金</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell>残高</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell> </Table.ColumnHeaderCell>
               </Table.Row>
@@ -66,23 +66,21 @@ const BankAccountsPage = () => {
                   <SkeletonTableCell />
                   <SkeletonTableCell />
                   <SkeletonTableCell />
-                  <SkeletonTableCell />
                 </Table.Row>
               ) : (
-                res.data.map((ba: BankAccount) => (
-                  <Table.Row key={ba.id}>
-                    <Table.Cell>{ba.bank_name}</Table.Cell>
-                    <Table.Cell>{ba.branch}</Table.Cell>
-                    <Table.Cell>{ba.account_type}</Table.Cell>
-                    <Table.Cell>{ba.account_number}</Table.Cell>
-                    <Table.Cell>{ba.account_holder}</Table.Cell>
+                res.data.map((at: AccountTransaction) => (
+                  <Table.Row key={at.id}>
+                    <Table.Cell>{at.recorded_at.getDate()}</Table.Cell>
+                    <Table.Cell>{at.description}</Table.Cell>
+                    <Table.Cell>{at.type}</Table.Cell>
+                    <Table.Cell>{at.amount}</Table.Cell>
                     <Table.Cell> -- </Table.Cell>
                     <Table.Cell>
                       <Dialog.Trigger>
                         <Settings
                           size={24}
                           color="gray"
-                          onClick={() => setFormData(ba)}
+                          onClick={() => setFormData(at)}
                         />
                       </Dialog.Trigger>
                     </Table.Cell>
@@ -97,4 +95,4 @@ const BankAccountsPage = () => {
   );
 };
 
-export default BankAccountsPage;
+export default AccountTransactionsPage;

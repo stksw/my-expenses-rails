@@ -58,7 +58,7 @@ function DesktopNav() {
           <Home className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/" label="Transfers">
+        <NavItem href="/account_transactions" label="Transaction">
           <LineChart className="h-5 w-5" />
         </NavItem>
 

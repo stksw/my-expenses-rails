@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :transaction_data, only: %i[ index create update destroy ]
+  resources :account_transactions, only: %i[ index create update destroy ]
   resources :bank_accounts, only: %i[ index create update destroy ]
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
