@@ -12,7 +12,7 @@ export type AccountTransaction = {
 };
 
 export type AccountTransactionFormData = Partial<AccountTransaction> & {
-  bank_account_id?: number;
+  bank_account_id?: string;
 };
 
 export const emptyAccountTransaction: AccountTransactionFormData = {

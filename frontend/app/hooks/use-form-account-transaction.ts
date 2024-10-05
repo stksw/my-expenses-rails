@@ -3,10 +3,18 @@ import { AccountTransactionFormData } from "../types/account_transaction";
 import { usePostAccountTransaction } from "@/apis/account_transactions/mutation";
 
 export const useFormAccountTransaction = () => {
-  const { handleSubmit, setValue, reset, register, formState } =
-    useForm<AccountTransactionFormData>({
-      mode: "onChange",
-    });
+  const {
+    handleSubmit,
+    setValue,
+    reset,
+    register,
+    control,
+    formState,
+    getValues,
+    getFieldState,
+  } = useForm<AccountTransactionFormData>({
+    mode: "onChange",
+  });
 
   const postAccountTransaction = usePostAccountTransaction();
 
@@ -25,5 +33,9 @@ export const useFormAccountTransaction = () => {
     setValue,
     reset,
     register,
+    control,
+    formState,
+    getValues,
+    getFieldState,
   };
 };

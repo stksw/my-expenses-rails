@@ -30,11 +30,11 @@ class AccountTransactionsController < ActionController::API
 
   private
 
-    def set_account_transation
+    def set_account_transaction
       @account_transaction = AccountTransaction.find(params[:id])
     end
 
     def account_transaction_params
-      params.require(:account_transaction).permit(:recorded_at, :description, :type, :amount, :large_category, :middle_category)
+      params.require(:account_transaction).permit(:recorded_at, :description, :type, :amount, :large_category, :middle_category, :bank_account_id)
     end
 end
