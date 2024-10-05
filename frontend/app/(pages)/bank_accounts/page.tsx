@@ -20,7 +20,7 @@ import { SkeletonTableCell } from "../../components/skelton";
 import { BankAccountForm } from "./form";
 import { useQuery } from "@tanstack/react-query";
 
-const Home = () => {
+const BankAccountsPage = () => {
   const [formData, setFormData] =
     useState<BankAccountFormData>(emptyBankAccount);
 
@@ -97,4 +97,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default BankAccountsPage;
