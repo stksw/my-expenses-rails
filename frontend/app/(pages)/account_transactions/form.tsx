@@ -77,8 +77,12 @@ export const AccountTransactionForm = ({
               name="type"
               rules={{ required: true }}
               render={({ field }) => {
+                const { ref, ...fieldWithoutRef } = field;
                 return (
-                  <Select.Root onValueChange={field.onChange} {...field}>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    {...fieldWithoutRef}
+                  >
                     <Select.Trigger placeholder="入金か出金を選んでください" />
                     <Select.Content color="indigo">
                       <Select.Group>
@@ -109,8 +113,12 @@ export const AccountTransactionForm = ({
               name="bank_account_id"
               rules={{ required: true }}
               render={({ field }) => {
+                const { ref, ...fieldWithoutRef } = field;
                 return (
-                  <Select.Root onValueChange={field.onChange} {...field}>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    {...fieldWithoutRef}
+                  >
                     <Select.Trigger placeholder="金融機関を選んでください" />
                     <Select.Content color="indigo">
                       <Select.Group>
