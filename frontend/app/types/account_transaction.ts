@@ -13,6 +13,11 @@ export type AccountTransaction = {
 
 export type AccountTransactionFormData = Partial<AccountTransaction> & {
   bank_account_id?: string;
+  import?: boolean;
+};
+
+export type AccountTransactionImportFormData = {
+  file: File;
 };
 
 export const emptyAccountTransaction: AccountTransactionFormData = {
@@ -22,4 +27,5 @@ export const emptyAccountTransaction: AccountTransactionFormData = {
   amount: "",
   large_category: "",
   middle_category: "",
+  import: false,
 };

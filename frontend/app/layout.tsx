@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html lang="ja" className={inter.className} suppressHydrationWarning>
       <body className={inter.className}>
         <ProviderTanStackQuery>
           <TooltipProvider>

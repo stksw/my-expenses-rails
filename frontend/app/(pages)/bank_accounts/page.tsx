@@ -10,14 +10,14 @@ import {
   Button,
 } from "@radix-ui/themes";
 import { Settings } from "lucide-react";
-import { BankAccountApi } from "../../apis/bank_accounts/function";
+import { BankAccountApi } from "@/apis/bank_accounts/function";
 import {
   BankAccount,
   BankAccountFormData,
   emptyBankAccount,
-} from "../../types/bank_account";
-import { SkeletonTableCell } from "../../components/skelton";
-import { BankAccountForm } from "./form";
+} from "@/types/bank_account";
+import { SkeletonTableCell } from "@/components/skelton";
+import { BankAccountForm } from "@/(pages)/bank_accounts/form";
 import { useQuery } from "@tanstack/react-query";
 
 const BankAccountsPage = () => {
