@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { BankAccountFormData } from "../types/bank_account";
+import { BankAccountFormData } from "@/types/bank_account";
 import { usePostBankAccount } from "@/apis/bank_accounts/mutation";
 
 export const useFormBankAccount = () => {
