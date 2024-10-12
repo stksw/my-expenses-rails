@@ -8,11 +8,12 @@ import {
   Heading,
   Dialog,
   Button,
+  DropdownMenu,
 } from "@radix-ui/themes";
 import { Settings } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { AccountTransactionApi } from "@/apis/account_transactions/function";
+import { AccountTransactionApi } from "@/apis/account_transactions/api_functions";
 import {
   AccountTransaction,
   AccountTransactionFormData,
@@ -36,15 +37,29 @@ const AccountTransactionsPage = () => {
     <Dialog.Root>
       <Container size="4">
         <div className="flex items-center">
-          <Heading as="h1">口座取引一覧</Heading>
+          <Heading as="h1">口座の取引履歴</Heading>
 
           <div className="ml-auto flex items-center gap-2">
             <AccountTransactionForm data={formData} />
-            <Dialog.Trigger>
-              <Button color="indigo" onClick={() => setFormData({ id: "" })}>
-                口座取引の追加
-              </Button>
-            </Dialog.Trigger>
+
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <Button color="indigo">
+                  取引履歴の追加
+                  <DropdownMenu.TriggerIcon />
+                </Button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content color="indigo">
+                <Dialog.Trigger onClick={() => setFormData({ id: "" })}>
+                  <DropdownMenu.Item>1件ずつ追加</DropdownMenu.Item>
+                </Dialog.Trigger>
+                <Dialog.Trigger onClick={() => setFormData({ import: true })}>
+                  <DropdownMenu.Item>
+                    ファイルによるインポート
+                  </DropdownMenu.Item>
+                </Dialog.Trigger>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
           </div>
         </div>
         <Box pt="8">
