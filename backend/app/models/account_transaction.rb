@@ -5,7 +5,7 @@ class AccountTransaction < ApplicationRecord
   enum :type, { deposit: 'deposit', withdrawal: 'withdrawal' }, default: 'withdrawal'
 
   def self.with_bank_account
-    joins(:bank_account).order(recorded_at: :asc).map do |account_transaction|
+    includes(:bank_account).order(recorded_at: :asc).map do |account_transaction|
       account_transaction.attributes.merge(bank_name: account_transaction.bank_account.bank_name)
     end
   end
