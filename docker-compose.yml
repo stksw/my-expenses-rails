@@ -17,14 +17,13 @@ services:
       interval: 2s
       timeout: 5s
       retries: 30
-  web:
+  backend:
     build:
-      context: .
+      context: ./backend/
       dockerfile: ./Dockerfile
-    entrypoint: ["bin/docker-entrypoint.sh"]
     command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b '0.0.0.0'"
     volumes:
-      - .:/usr/src/app
+      - ./backend:/usr/src/app
       - bundle:/usr/local/bundle
     ports:
       - "3000:3000"
@@ -32,7 +31,6 @@ services:
       - RAILS_ENV=development
     depends_on:
       - db
-
 volumes:
   pg_data:
   bundle:
