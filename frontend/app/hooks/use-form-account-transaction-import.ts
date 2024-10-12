@@ -1,6 +1,6 @@
 import { ChangeEvent, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AccountTransactionImportFormData } from "../types/account_transaction";
+import { AccountTransactionImportFormData } from "@/types/account_transaction";
 import { usePostAccountTransactionImport } from "@/apis/account_transaction_imports/mutation";
 
 export const useFormAccountTransactionImport = () => {

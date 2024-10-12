@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "axios";
-import { ServerApi } from "../../providers/axios";
-import { BankAccount, BankAccountFormData } from "../../types/bank_account";
+import { ServerApi } from "@/providers/axios";
+import { BankAccount, BankAccountFormData } from "@/types/bank_account";
 
 const path = "bank_accounts";
 

@@ -1,5 +1,5 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const useBankAccountCache = () => {
   const queryClient = useQueryClient();
