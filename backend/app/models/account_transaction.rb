@@ -12,6 +12,7 @@ class AccountTransaction < ApplicationRecord
 
   def self.import(file)
     success_count, error = 0, nil
+    branches = BankAccount.all.map { |ac| { id: ac.id, name: ac.name_with_branch } }
 
     if file.nil?
       error = 'ファイルが選択されていません'
@@ -23,18 +24,20 @@ class AccountTransaction < ApplicationRecord
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-
-      puts row.inspect
+  
       account_transaction = AccountTransaction.new
       account_transaction.recorded_at = row['recorded_at']
       account_transaction.description = row['description']
       account_transaction.type = row['type']
       account_transaction.amount = row['amount']
-      account_transaction.bank_account_id = row['bank_account_id']
+      branch = branches.find {|b| b[:name] == row['branch_name'] }
+      if branch.present?
+        account_transaction.bank_account_id = branch[:id]
+      end
       account_transaction.save!
       success_count += 1
     end
-    return success_count, error
+    success_count, error
   end
 
 end
