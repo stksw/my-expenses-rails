@@ -37,7 +37,7 @@ class AccountTransaction < ApplicationRecord
       account_transaction.save!
       success_count += 1
     end
-    success_count, error
+    return success_count, error
   end
 
 end
