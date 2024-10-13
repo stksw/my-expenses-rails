@@ -1,2 +1,3 @@
 require 'bank_accounts.schema.rb'
 require 'account_transactions.schema.rb'
+require 'account_histories.schema.rb'
